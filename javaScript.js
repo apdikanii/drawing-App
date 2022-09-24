@@ -1,16 +1,17 @@
+
 const canvas = document.getElementById("canvas");
-const ct2d = canvas.getContext("2d");
 const decrease = document.getElementById('decrease');
 const increase = document.getElementById('increase');
-const sizeELs = document.getElementById('size');
+const sizeEL = document.getElementById('size');
 const colorEL = document.getElementById('color');
 const clearEL = document.getElementById('clear');
+const ct2d = canvas.getContext("2d");
 
 let size = 30;
 let isPressed = false;
-const color = 'black';
-const x = undefined;
-const y = undefined;
+let color = "black";
+let x = undefined;
+let y = undefined;
 
 canvas.addEventListener("mousedown", (e) => {
     isPressed = true;
@@ -21,13 +22,13 @@ canvas.addEventListener("mouseup", (e) => {
     isPressed = false;
     x = undefined;
     y = undefined;
-})
+});
 canvas.addEventListener("mousemove", (e) => {
     if(isPressed) {
-        const x = e.offsetX;
-        const y = e.offsetY;
+        const x2 = e.offsetX;
+        const y2 = e.offsetY;
         drawCircle(x2, y2);
-        drawLine(x1, y1, x2, y2)
+        drawLine(x1, y1, x2, y2);
         x = x2;
         y = y2;
     }
@@ -46,6 +47,7 @@ function drawLine(x1, y1, x2, y2){
     ct2d.lineWidth = size * 2;
     ct2d.stroke();
 }
+
 increase.addEventListener("click", () => {
     size += 5;
     if( size > 50) {
@@ -60,12 +62,12 @@ decrease.addEventListener("click", () => {
     }
     updateSize();
 });
-colorEl.addEventListener("change", (e) => {
+colorEL.addEventListener("change", (e) => {
     color = e.target.value;
 })
-clearInterval.addEventListener("click", () =>{
+clearEL.addEventListener("click", () =>{
     ct2d.clearRect(0, 0, canvas.width, canvas.height);
 })
 function updateSize() {
-    sizeEl.innerText = size;
+    sizeEL.innerText = size;
 }
